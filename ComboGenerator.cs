@@ -22,6 +22,41 @@ namespace SCHWB_Chains
             }
         }
 
+        public List<Form1.Move> GenerateRandomCombo(string starterName)
+        {
+            Combo = new List<Form1.Move>();
+            Form1.Move starter;
+
+            // Choose random starter
+            // Will be overwritten if a starter is specified
+            int r = rnd.Next(Starters.Count);
+            starter = Starters[r];
+
+            // Find move that has the specified name
+            foreach (Form1.Move s in Starters)
+            {
+                if (s.Name == starterName)
+                {
+                    starter = s;
+                    break;
+                }
+            }
+
+            Combo.Add(starter);
+
+            while (true)
+            {
+                List<Form1.Move> options = getOptions(Combo.Last().Followups);
+
+                if (options.Count == 0)
+                    return Combo;
+
+                r = rnd.Next(options.Count);
+
+                Combo.Add(options[r]);
+            }
+        }
+
         public List<Form1.Move> GenerateRandomCombo()
         {
             Combo = new List<Form1.Move>();

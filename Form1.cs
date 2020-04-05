@@ -103,6 +103,11 @@ namespace SCHWB_Chains
             moves.RemoveAt(0);
 
             gen = new ComboGenerator(moves);
+ 
+            foreach (Move m in moves)
+            {
+                comboBox1.Items.Add(m.Name);
+            }
         }
 
         public struct Move
@@ -131,7 +136,7 @@ namespace SCHWB_Chains
             {
                 for (int i = 0; i < Int32.Parse(textBox3.Text); i++)
                 {
-                    var combo = gen.GenerateRandomCombo();
+                    var combo = gen.GenerateRandomCombo(comboBox1.Text);
                     string moves = "";
                     string inputs = "";
 
